@@ -30,4 +30,7 @@ Classification model: Logistic Regression model
 Evaluation techniques:
 (1) Error matrix, (2) Risk chart, (3) Area under the ROC
 
+Scoring (Verification): 
+(1) Probability, (2) Score
+
 
