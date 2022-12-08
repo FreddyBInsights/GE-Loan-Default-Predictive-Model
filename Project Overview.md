@@ -24,13 +24,13 @@ Software:
 Data understanding/preparation techniques:
 (1) Data summaries, (2) Correlation reports, (3) Distribution charts, (4) Missing data summaries
 
-Model building techniques:
+Model building techniques (Training dataset):
 Classification model: Logistic Regression model
 
-Evaluation techniques:
+Evaluation techniques (Evaluation dataset):
 (1) Error matrix, (2) Risk chart, (3) Area under the ROC
 
-Scoring (Verification): 
+Scoring (Verification dataset): 
 (1) Probability, (2) Score
 
 
