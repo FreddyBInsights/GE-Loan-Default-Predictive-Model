@@ -1,0 +1,98 @@
+General Electric Loan Default Predictive Model
+
+
+# Data Understanding and Preparation
+
+# Load readxl package to R library to allow R to read the Credit Data excel document
+
+library(readxl)
+
+# Run the code below to import the Credit Data into the R environment 
+
+# Ensure that the code reflects the location of the Credit Data file on your computer
+
+Creditdata <- read_excel("//apporto.com/dfs/SNHU/Users/alfred.bascom_snhu/Desktop/GE/DAT 690 Credit-Proj1LoanDfltTrain.xlsx")
+
+# View the data
+
+view(Creditdata) # Provides a look at the raw data
+
+str(Creditdata) # Provides further details about the data
+
+# Install and open rattle
+
+install.packages("rattle") # Installs the rattle package 
+library(rattle) # Add rattle to the R library 
+rattle() # Open rattle
+
+
+# While in rattle
+# 1. On Data tab select R Dataset and choose the file Creditdata (Execute)
+# 2. Select partition and set to 70/30
+# 3. Seed: 42
+# 4. Set variable OBS. to Ident
+# 5. Ensure DEFAULT is set as the Target variable
+
+# Summarize the data
+
+summary(Creditdata) # Provides a summary of the Credit Data
+
+# Describe the data
+
+library(Hmisc) # Add the Hmisc package to the R library
+
+describe(Creditdata) # Provides a description of the data 
+
+# Check for missing data 
+
+is.na(Creditdata) # Provides details about missing data
+
+na.omit(Creditdata) # Allows you to remove incomplete rows of data
+
+# Check distribution
+
+plot(ecdf(Creditdata$DURATION)) # Modify the code to produce distribution visualization for the variable you want
+
+# Alternative way to check distribution
+# Go to the Explore tab in rattle and select Distribution
+# Select a variable and the type of visualization (Execute)
+
+# Check for correlation between independent variables 
+
+install.packages("corrplot") # install corrplot package
+library("corrplot") # Add the corrplot package to the R library 
+
+corrplot(cor(Creditdata), method = "number") #Produces a correlation visualization
+
+# Remove highly correlated independent variables
+
+# Before building model:
+# 1. Ensure data understanding and preparation have been complete
+# 2. Ensure that data has been partitioned into training and test sets
+
+# Build a logistic regression model
+
+Model <- glm(formula = DEFAULT ~ ., family = binomial(link = "logit"),data = crs$dataset[crs$train, c(crs$input, crs$target)])
+
+# Model evaluation 
+
+summary(Model) # Model summary
+
+# The information within the summary should be used to omit insignificant variables
+
+eval(Model) # Provides a better look at each variables estimate
+
+plot(Model) # Produces visualizations of the model    
+
+# On the Data tab in rattle change insignificant variables from input to ignore (Execute)
+# Complete iterations of variable reduction and model building
+
+# Revisit data understanding and preparation steps if necessary
+ 
+# Save the model after each iteration
+
+saveRDS(Model, "./Model.RDS") # Ensure the model's name is reflected in the code
+
+# Open the model
+
+GEModel <- readRDS("./Model.RDS") # Ensure the model's name is reflected in the code
